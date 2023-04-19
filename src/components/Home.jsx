@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Categories from './Categories';
 
 class Home extends Component {
   render() {
@@ -14,6 +15,7 @@ class Home extends Component {
             search
           </Link>
         </div>
+        <Categories />
       </div>
     );
   }
