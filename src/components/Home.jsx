@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Categories from './Categories';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+// import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends Component {
-  state = { produtos: [], pesquisa: '', };
+  // state = { produtos: [], pesquisa: '' };
 
   componentDidMount() {
     this.getProduct();
@@ -17,25 +17,23 @@ class Home extends Component {
     });
   };
 
-  getProduct = async () => {
-    const { pesquisa } = this.state;
-    const produtos = await getProductsFromCategoryAndQuery(' ', pesquisa);
-    this.setState({ produtos });
-    
-  };
+  // getProduct = async () => {
+  //   const { pesquisa } = this.state;
+  //   const products = await getProductsFromCategoryAndQuery(' ', pesquisa);
+  //   this.setState({ products });
+  // };
 
   render() {
-    const { produtos } = this.state;
     return (
 
       <div>
         <div>
-            <input
-              placeholder="pesquisar"
-              type="text"
-              name="pesquisa"
-              data-testid="query-input"
-              onChange={ this.onChange }
+          <input
+            placeholder="pesquisar"
+            type="text"
+            name="pesquisa"
+            data-testid="query-input"
+            onChange={ this.onChange }
           />
           <button
             type="button"
