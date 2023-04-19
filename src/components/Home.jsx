@@ -30,12 +30,12 @@ class Home extends Component {
 
       <div>
         <div>
-            <input
-              placeholder="pesquisar"
-              type="text"
-              name="pesquisa"
-              data-testid="query-input"
-              onChange={ this.onChange }
+          <input
+            placeholder="pesquisar"
+            type="text"
+            name="pesquisa"
+            data-testid="query-input"
+            onChange={ this.onChange }
           />
           <button
             type="button"
