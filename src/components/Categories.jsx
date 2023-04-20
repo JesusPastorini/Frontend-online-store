@@ -11,7 +11,6 @@ class Categories extends Component {
   getCateg = async () => {
     const categories = await getCategories();
     this.setState({ categories });
-    console.log(categories);
   };
 
   render() {
