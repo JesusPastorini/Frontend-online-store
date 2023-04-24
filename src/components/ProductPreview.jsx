@@ -3,6 +3,13 @@ import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class ProductPreview extends React.Component {
+  addShop = (title, thumbnail, price) => {
+    const cartItem = { title, thumbnail, price, quantity: 1 }; // Adiciona o produto com quantidade inicial 1
+    const cart = JSON.parse(localStorage.getItem('cart')) || []; // Obtém o carrinho atual do localStorage ou cria um novo array vazio
+    cart.push(cartItem); // Adiciona o item ao carrinho
+    localStorage.setItem('cart', JSON.stringify(cart)); // Salva o carrinho atualizado no localStorage
+  };
+
   render() {
     const { product } = this.props;
     const { title, thumbnail, price } = product;
@@ -20,7 +27,7 @@ class ProductPreview extends React.Component {
         <button
           data-testid="product-add-to-cart"
           type="button"
-          // inserir função de adicionar ao carrinho
+          onClick={ () => this.addShop(title, thumbnail, price) }
         >
           Adicionar ao carrinho
         </button>
