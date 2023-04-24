@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import ProductPreview from '../components/ProductPreview';
 
 class Home extends Component {
   state = {
@@ -42,22 +43,22 @@ class Home extends Component {
   render() {
     const { categories } = this.state;
     const { produtos } = this.state;
-    const categorias = categories.map(({ element, nome }) => (
-      <li key={ element }>
+    const categorias = categories.map(({ id, name }) => (
+      <li key={ id }>
         <label htmlFor="category" data-testid="category">
           <input
             type="radio"
             name="listaCategorias"
-            value={ element }
+            value={ id }
             id="category"
             onChange={ this.offChange }
           />
-          { nome }
+          { name }
         </label>
       </li>
     ));
     return (
-      <div className="homepage-div">
+      <main className="homepage-div">
         <Link to="/ShoppingCart" data-testid="shopping-cart-button">
           Carrinho de compras
         </Link>
@@ -80,22 +81,19 @@ class Home extends Component {
             />
             Digite algum termo de pesquisa ou escolha uma categoria.
           </span>
-          <div>
+          <ul>
             { produtos.length > 0
               ? produtos.map((produto) => (
-                <div key={ produto.id } data-testid="product">
-                  <span>{produto.title}</span>
-                  <img src={ produto.thumbnail } alt="produto" />
-                  <span>{produto.price}</span>
-                  <button type="button">Adicionar ao carrinho</button>
-                </div>
+                <li data-testid="product" key={ produto.id }>
+                  <ProductPreview product={ produto } />
+                </li>
               )) : <span>Nenhum produto foi encontrado</span> }
-          </div>
+          </ul>
         </div>
-        <li>
+        <nav>
           { categorias }
-        </li>
-      </div>
+        </nav>
+      </main>
     );
   }
 }
