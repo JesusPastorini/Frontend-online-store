@@ -8,6 +8,22 @@ export default class ShoppingCart extends Component {
     this.setState({ cartItems: cart }); // Atualiza o estado com os itens do carrinho
   }
 
+  QuantityChange = (index, newQuantity) => { // funçao que atualiza a quantidade de produto no carrinho
+    const { cartItems } = this.state;
+    const newCartItems = [...cartItems];
+    newCartItems[index].quantity = Math.max(newQuantity, 1);
+    this.setState({ cartItems: newCartItems });
+    localStorage.setItem('cart', JSON.stringify(newCartItems)); // salva no localstorage
+  };
+
+  RemoveProduct = (index) => { // funçao que remove o produto do carrinho
+    const { cartItems } = this.state;
+    const newCartItems = [...cartItems];
+    newCartItems.splice(index, 1);
+    this.setState({ cartItems: newCartItems });
+    localStorage.setItem('cart', JSON.stringify(newCartItems)); // salva no localstorage
+  };
+
   render() {
     const { cartItems } = this.state;
     return (
@@ -21,7 +37,30 @@ export default class ShoppingCart extends Component {
               <span
                 data-testid="shopping-cart-product-quantity"
               >
-                {`Quantidade: ${item.quantity}`}
+
+                <button // botao que diminui a quantidade
+                  data-testid="product-decrease-quantity"
+                  onClick={ () => this.QuantityChange(index, item.quantity - 1) }
+                >
+                  -
+                </button>
+
+                {item.quantity}
+
+                <button // botao que aumenta a quantidade
+                  data-testid="product-increase-quantity"
+                  onClick={ () => this.QuantityChange(index, item.quantity + 1) }
+                >
+                  +
+                </button>
+
+                <button // botao que remove o produto do carrinho
+                  data-testid="remove-product"
+                  onClick={ () => this.RemoveProduct(index) }
+                >
+                  Remover
+                </button>
+
               </span>
             </div>
           ))
