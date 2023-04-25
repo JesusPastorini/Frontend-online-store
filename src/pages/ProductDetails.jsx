@@ -20,13 +20,13 @@ export default class ProductDetails extends Component {
   handleAddToCart = () => {
     const { produto } = this.state;
     const quantity = 1; // Quantidade desejada do produto (pode ser ajustada)
-  
+
     // Obtém o carrinho do local storage (se existir)
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  
+
     // Adiciona o produto ao carrinho
     cart.push({ ...produto, quantity });
-  
+
     // Salva o carrinho atualizado no local storage
     localStorage.setItem('cart', JSON.stringify(cart));
   };
@@ -54,14 +54,14 @@ export default class ProductDetails extends Component {
             </p>
           </div>
           <button
-  data-testid="product-detail-add-to-cart"
-  onClick={this.handleAddToCart}
->
-  Adicionar ao Carrinho
-</button>
-<Link to="/ShoppingCart" data-testid="shopping-cart-button">
-          Carrinho de compras
-        </Link>
+            data-testid="product-detail-add-to-cart"
+            onClick={ this.handleAddToCart }
+          >
+            Adicionar ao Carrinho
+          </button>
+          <Link to="/ShoppingCart" data-testid="shopping-cart-button">
+            Carrinho de compras
+          </Link>
         </section>
       </main>
     );
